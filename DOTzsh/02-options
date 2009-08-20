@@ -1,0 +1,30 @@
+#! /bin/zsh
+
+setopt AUTO_CD # Fügt "cd" automatisch ein, wenn Kommando ein Verzeichnis ist
+setopt AUTO_PUSHD
+#setopt PUSHD_IGNORE_DUPS
+
+setopt AUTO_MENU # Zusätzlicher Tab bis Menü
+setopt AUTO_LIST # Liste schon beim ersten Tab
+#setopt MENU_COMPLETE # Anstatt Liste, erstes Wort einsetzen, Rest als Menü
+
+setopt CORRECT
+
+setopt MULTIOS # Automatisch cat und tee einfügen
+
+setopt NO_MATCH # Wenn nix passt, Fehler ausgeben, nicht "*" als Parameter
+setopt RM_STAR_WAIT # Sicherheitsabfrage beim löschen aller Dateien
+
+#setopt PRINT_EXIT_VALUE
+setopt LONG_LIST_JOBS
+
+# Enhanced Autocompletion
+autoload -U compinit && compinit 
+
+# Regex: [[ alphabetical -regex-match ^a([^a]+)a([^a]+)a ]]
+autoload -U regex
+
+# ZMV: zmv '(* *)' '${1// /}' oder zmv -W '*.sh' '*.pl'
+autoload -U zmv
+
+

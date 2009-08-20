@@ -1,0 +1,14 @@
+#! /bin/zsh
+
+alias lls="$(which ls)"
+alias ls='ls -vhFpG --color=auto'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
+
+alias pv='pv -cpert'
+
+alias d='dirs -lv'
+
+alias mv='nocorrect noglob mv'
+alias zmv='noglob zmv'

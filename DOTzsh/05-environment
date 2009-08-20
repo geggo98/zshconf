@@ -1,0 +1,63 @@
+#! /bin/zsh
+
+# Path
+path=(~/apps/bin $path)
+
+# Editor
+
+if { which mate &> /dev/null } 
+then
+	GIT_EDITOR="mate -wl1"
+	TEXEDIT='mate -w -l %d "%s"'
+	LESSEDIT='mate -l %lm %f'
+	export PATH
+	export EDITOR
+	export GIT_EDITOR
+	export TEXEDIT
+	export LESSEDIT 
+fi
+
+for i in mate_wait mcedit vim
+do
+	if { which $i &> /dev/null } 
+	then
+		EDITOR=$(which $i)
+		export EDITOR
+		break
+	fi
+done
+
+# Getting proxy server from Cygwin environment
+if [[ -z $no_proxy && ! -z $NO_PROXY ]] {export no_proxy=$NO_PROXY}
+if [[ -z $http_proxy && ! -z $HTTP_PROXY ]] {export http_proxy=$HTTP_PROXY}
+if [[ -z $ftp_proxy && ! -z $FTP_PROXY ]] {export FTP_proxy=$FTP_PROXY}
+
+# Manpages anzeigen ohne Exit bei EOF
+PAGER="less -Rs"
+export PAGER
+
+# Manpages über AquaLess anzeigen
+#MANPAGER="aless"
+#export MANPAGER
+
+#Lesspipe
+LESS="-Rs"
+export LESS
+if {which lesspipe.sh &> /dev/null} { eval $(lesspipe.sh) }
+
+#JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home/
+#GROOVY_HOME=~/apps/share/groovy/
+#export JAVA_HOME
+#export GROOVY_HOME
+
+#SVMREPOS=~/.svm/repos
+#SVMURL="file://${SVMREPOS}"
+#SVNURL="${SVMURL}/local"
+#export SVMREPOS
+#export SVMURL
+#export SVNURL
+
+#LANG=de_DE.UTF-8
+#LC_CTYPE=de_DE.UTF-8
+#export LANG
+#export LC_CTYPE 

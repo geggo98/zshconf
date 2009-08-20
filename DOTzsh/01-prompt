@@ -1,0 +1,65 @@
+#! /bin/zsh
+
+_define_prompt(){
+	setopt prompt_subst
+	setopt transient_rprompt
+	
+	local namecolor
+	local atcolor
+	local hostcolor
+	local dircolor
+	local promptcolor
+	local defaultcolor
+	local errorcolor
+	local jobcolor
+
+	if [[ $termcap[color] -ge 80 ]];
+	then
+		#cyan white yellow magenta black blue red default grey green
+		autoload -U colors && colors
+		namecolor="%{\$fg[green]%}"
+		atcolor="%{\$fg[green]%}"
+		hostcolor="%{\$fg[green]%}"
+		dircolor="%{\$fg[yellow]%}"
+		promptcolor="%{\$fg[default]\$bg[default]%}"
+		defaultcolor="%{\${reset_color}%}"
+		jobcolor="%{\$bg[blue]$fg[default]%}"
+		errorcolor="%{\$bg[red]\$fg[default]%}"
+	fi
+	PROMPT=$(print "${namecolor}%n${atcolor}@${hostcolor}%m${defaultcolor} ${dircolor}%~${promptcolor}\n%# ${defaultcolor}")
+	RPROMPT="%1(j.${jobcolor}[JOB:%j]${defaultcolor}.)%(?..${errorcolor}[ERR:%?]${defaultcolor})"
+}
+
+_xterm_title(){
+	emulate -L zsh
+	setopt no_prompt_subst
+	print -Pn "\e]0;${(V)@}\a"
+}
+
+_screen_title(){
+	emulate -L zsh
+	setopt no_prompt_subst
+	print -Pn "\ek${(V)@}\e\\"
+}
+
+_define_title(){
+	case $TERM in
+		xterm*|rxvt)
+			_title(){_xterm_title $@}
+			;;
+		screen)
+			_title(){_screen_title $@; _xterm_title $@}
+			;;
+		*)
+			_title(){}
+			;;
+	esac
+	
+	precmd(){_title "%m: %~"}
+	preexec(){_title "%m: %~ %# $1"}
+}
+
+
+_define_prompt
+_define_title
+

@@ -1,0 +1,15 @@
+#! /bin/zsh
+
+# History
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=10000
+
+setopt APPEND_HISTORY
+setopt EXTENDED_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_ALL_DUPS # oder HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+#setopt HIST_FCNTL_LOCK # Schnelles sperren der History-Datei, funktioniert nicht überall

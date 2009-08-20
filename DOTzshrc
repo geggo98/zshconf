@@ -1,0 +1,3 @@
+#! /bin/zsh
+
+for file in ~/.zsh/**/*(x); source $file
