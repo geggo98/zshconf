@@ -1,5 +1,12 @@
 #! /bin/zsh
 
+if { which apg &> /dev/null } 
+then
+	alias apg.orig="$(which apg)"
+	# see http://linux.die.net/man/1/apg
+	alias apg=' apg -m 10 -a 0 -t -M sNCL'
+fi
+
 alias lls="$(which ls)"
 alias ls='ls -vhFpG --color=auto'
 alias la='ls -a'
